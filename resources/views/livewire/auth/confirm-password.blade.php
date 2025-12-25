@@ -1,7 +1,7 @@
 <div class="flex flex-col gap-6">
     <x-auth-header
-        :title="__('Confirm password')"
-        :description="__('This is a secure area of the application. Please confirm your password before continuing.')"
+        :title="__('Konfirmasi Kata Sandi')"
+        :description="__('Ini adalah area aman aplikasi. Silakan konfirmasi kata sandi Anda sebelum melanjutkan.')"
     />
 
     <!-- Session Status -->
@@ -11,7 +11,7 @@
         {{-- Password --}}
         @php
             $field_name = "password";
-            $filed_label = __("Password");
+            $filed_label = __("Kata Sandi");
             $field_placeholder = $filed_label;
             $required = "required";
         @endphp
@@ -24,7 +24,7 @@
         />
 
         <x-button class="w-full" variant="primary" type="submit">
-            {{ __("Confirm") }}
+            {{ __("Konfirmasi") }}
         </x-button>
     </form>
 </div>

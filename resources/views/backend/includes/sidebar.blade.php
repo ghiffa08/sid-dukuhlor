@@ -10,16 +10,14 @@ $notifications_latest = optional($notifications)->take(5);
             <a href="/">
                 <img
                     class="sidebar-brand-full"
-                    src="{{ asset("img/logo-with-text.jpg") }}"
+                    src="{{ asset("img/logo-desa.webp") }}"
                     alt="{{ app_name() }}"
-                    height="46"
-                />
+                    height="100" />
                 <img
                     class="sidebar-brand-narrow"
-                    src="{{ asset("img/logo-square.jpg") }}"
+                    src="{{ asset("img/logo-desa.webp") }}"
                     alt="{{ app_name() }}"
-                    height="46"
-                />
+                    height="48" />
             </a>
         </div>
         <button
@@ -28,8 +26,7 @@ $notifications_latest = optional($notifications)->take(5);
             data-coreui-theme="dark"
             type="button"
             aria-label="Close"
-            onclick='coreui.Sidebar.getInstance(document.querySelector("#sidebar")).toggle()'
-        ></button>
+            onclick='coreui.Sidebar.getInstance(document.querySelector("#sidebar")).toggle()'></button>
     </div>
 
     {{-- Dynamic Menu from Database --}}
@@ -37,11 +34,11 @@ $notifications_latest = optional($notifications)->take(5);
 
     {{-- Fallback: Load menu items from menu_data.json (in case dynamic menu is empty) --}}
     @php
-        $hasMenuItems = \Modules\Menu\Models\Menu::getCachedMenuData("admin-sidebar", auth()->user())->isNotEmpty();
+    $hasMenuItems = \Modules\Menu\Models\Menu::getCachedMenuData("admin-sidebar", auth()->user())->isNotEmpty();
     @endphp
 
     @if (! $hasMenuItems)
-        <x-backend.fallback-sidebar-menu />
+    <x-backend.fallback-sidebar-menu />
     @endif
 
     <div class="sidebar-footer border-top d-none d-md-flex">

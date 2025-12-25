@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\User;
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Traits\AutoDiscoverModuleSeeders;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Schema;
@@ -29,6 +28,13 @@ class DatabaseSeeder extends Seeder
         if ($this->shouldSeedDummyData()) {
             $this->callDummyDataSeeders();
         }
+
+        $this->call([
+            \Modules\Carousel\Database\Seeders\CarouselDatabaseSeeder::class,
+            \Modules\ProfileDesa\Database\Seeders\ProfileDesaDatabaseSeeder::class,
+            \Modules\Statistic\Database\Seeders\StatisticDatabaseSeeder::class,
+            \Modules\Transparansi\Database\Seeders\TransparansiDatabaseSeeder::class,
+        ]);
 
         Schema::enableForeignKeyConstraints();
 
@@ -103,14 +109,14 @@ class DatabaseSeeder extends Seeder
         }
 
         $moduleNameLower = strtolower($moduleName);
-        $seederBinding = $moduleNameLower.'.database.seeder';
+        $seederBinding = $moduleNameLower . '.database.seeder';
 
         if (app()->bound($seederBinding)) {
             try {
                 $seederClass = app()->make($seederBinding);
                 $this->call($seederClass);
             } catch (\Exception $e) {
-                $this->command->warn("Failed to seed module '{$moduleName}': ".$e->getMessage());
+                $this->command->warn("Failed to seed module '{$moduleName}': " . $e->getMessage());
             }
         }
     }

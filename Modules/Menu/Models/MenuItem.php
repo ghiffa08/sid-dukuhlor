@@ -3,6 +3,7 @@
 namespace Modules\Menu\Models;
 
 use App\Models\BaseModel;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -31,7 +32,35 @@ class MenuItem extends BaseModel
             'opens_new_tab' => 'boolean',
             'is_visible' => 'boolean',
             'is_active' => 'boolean',
+            'status' => 'boolean',
         ];
+    }
+
+    protected function routeParameters(): Attribute
+    {
+        return Attribute::make(
+            get: function (): array {
+                $params = $this->getRawOriginal('route_parameters');
+
+                if (empty($params)) {
+                    return [];
+                }
+
+                if (is_array($params)) {
+                    return $params;
+                }
+
+                if (is_string($params)) {
+                    $decoded = json_decode($params, true);
+
+                    if (json_last_error() === JSON_ERROR_NONE && is_array($decoded)) {
+                        return $decoded;
+                    }
+                }
+
+                return [];
+            }
+        );
     }
 
     /**
@@ -151,7 +180,7 @@ class MenuItem extends BaseModel
     public function isExternal(): bool
     {
         return $this->type === 'external' ||
-               (filter_var($this->url, FILTER_VALIDATE_URL) &&
+            (filter_var($this->url, FILTER_VALIDATE_URL) &&
                 ! str_contains($this->url, config('app.url')));
     }
 
@@ -160,22 +189,29 @@ class MenuItem extends BaseModel
      */
     public function getFullUrl(): ?string
     {
-        // If URL is present, use it directly
+        // If it's a dropdown, return # (dropdown shouldn't have URL)
+        if ($this->isDropdown() && $this->hasChildren()) {
+            return '#';
+        }
+
+        // Priority 1: Use route_name if available and not '#'
+        if (! empty($this->route_name) && $this->route_name !== '#') {
+            try {
+                $parameters = $this->routeParameters;
+
+                return route($this->route_name, $parameters);
+            } catch (\Exception $e) {
+                // If route doesn't exist, log error and fall through to next option
+                \Illuminate\Support\Facades\Log::warning("Route '{$this->route_name}' not found for menu item ID {$this->id}");
+            }
+        }
+
+        // Priority 2: Use URL if present and not empty
         if (! empty($this->url)) {
             return $this->url;
         }
 
-        // If URL is empty, fall back to route_name
-        if (! empty($this->route_name)) {
-            try {
-                return route($this->route_name, $this->route_parameters ?? []);
-            } catch (\Exception $e) {
-                // If route doesn't exist, return placeholder
-                return '#';
-            }
-        }
-
-        // If both URL and route_name are empty, return placeholder
+        // Default fallback
         return '#';
     }
 

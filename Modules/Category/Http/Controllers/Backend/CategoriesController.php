@@ -57,7 +57,17 @@ class CategoriesController extends BackendBaseController
             'status' => 'nullable|max:191',
         ]);
 
-        $$module_name_singular = $module_model::create($request->except('image'));
+        $$module_name_singular = $module_model::create($request->only([
+            'name',
+            'slug',
+            'group_name',
+            'description',
+            'meta_title',
+            'meta_description',
+            'meta_keyword',
+            'order',
+            'status'
+        ]));
 
         if ($request->image) {
             $media = $$module_name_singular->addMedia($request->file('image'))->toMediaCollection($module_name);
@@ -132,7 +142,17 @@ class CategoriesController extends BackendBaseController
 
         $$module_name_singular = $module_model::findOrFail($id);
 
-        $$module_name_singular->update($request->except('image', 'image_remove'));
+        $$module_name_singular->update($request->only([
+            'name',
+            'slug',
+            'group_name',
+            'description',
+            'meta_title',
+            'meta_description',
+            'meta_keyword',
+            'order',
+            'status'
+        ]));
 
         // Image
         if ($request->hasFile('image')) {

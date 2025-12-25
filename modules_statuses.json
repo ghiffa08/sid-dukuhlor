@@ -2,5 +2,9 @@
     "Post": true,
     "Category": true,
     "Tag": true,
-    "Menu": true
+    "Menu": true,
+    "Carousel": true,
+    "ProfileDesa": true,
+    "Statistic": true,
+    "Transparansi": true
 }

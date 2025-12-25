@@ -1,0 +1,13 @@
+{
+    "name": "ProfileDesa",
+    "alias": "profiledesa",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\ProfileDesa\\Providers\\ProfileDesaServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

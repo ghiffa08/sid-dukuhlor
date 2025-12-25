@@ -1,0 +1,13 @@
+{
+    "name": "Transparansi",
+    "alias": "transparansi",
+    "description": "Module untuk transparansi anggaran desa",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\Transparansi\\Providers\\TransparansiServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

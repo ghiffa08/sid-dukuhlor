@@ -3,8 +3,8 @@
 namespace Modules\Menu\database\seeders;
 
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Schema; // Tambahkan import ini
 use Modules\Menu\Models\Menu;
 use Modules\Menu\Models\MenuItem;
 
@@ -46,8 +46,8 @@ class CurrentMenuDataSeeder extends Seeder
             echo 'Seeding menus and menu items from JSON data...'.PHP_EOL;
         }
 
-        // Disable foreign key constraints
-        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+        // Disable foreign key constraints (Gunakan Schema facade agar kompatibel dengan SQLite)
+        Schema::disableForeignKeyConstraints();
 
         // Truncate existing data
         MenuItem::truncate();
@@ -113,8 +113,8 @@ class CurrentMenuDataSeeder extends Seeder
             ]);
         }
 
-        // Re-enable foreign key constraints
-        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+        // Re-enable foreign key constraints (Gunakan Schema facade)
+        Schema::enableForeignKeyConstraints();
 
         echo 'Menus and menu items seeded successfully from JSON data!'.PHP_EOL;
     }

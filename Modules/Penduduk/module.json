@@ -1,0 +1,13 @@
+{
+    "name": "Penduduk",
+    "alias": "penduduk",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\Penduduk\\Providers\\PendudukServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

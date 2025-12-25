@@ -64,6 +64,7 @@ class User extends Authenticatable implements HasMedia, MustVerifyEmail
     {
         return $this->hasMany(UserProvider::class);
     }
+
     /**
      * Toggle for using cached permissions.
      *
@@ -92,7 +93,7 @@ class User extends Authenticatable implements HasMedia, MustVerifyEmail
 
         $userRoles = $this->roles; // Uses cached accessor
 
-        if (is_string($roles) && false !== strpos($roles, '|')) {
+        if (is_string($roles) && strpos($roles, '|') !== false) {
             $roles = $this->convertPipeToArray($roles);
         }
 
@@ -229,10 +230,13 @@ class User extends Authenticatable implements HasMedia, MustVerifyEmail
             return parent::getAllPermissions();
         }
 
-        // Get direct permissions (cached)
+        // Ensure direct permissions and roles with their permissions are loaded
+        $this->load(['permissions', 'roles.permissions']);
+
+        // Get direct permissions
         $permissions = $this->permissions;
 
-        // Get permissions from roles (cached)
+        // Get permissions from roles
         return $permissions->merge(
             $this->roles->flatMap(function ($role) {
                 return $role->permissions;

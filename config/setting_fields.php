@@ -8,40 +8,40 @@ return [
 
         'elements' => [
             [
-                'type' => 'text', // input fields type
-                'data' => 'string', // data type, string, int, boolean
-                'name' => 'app_name', // unique name for field
-                'label' => 'App Name', // you know what label it is
-                'rules' => 'required|min:2|max:50', // validation rule of laravel
-                'class' => '', // any class for input
-                'value' => 'Laravel Starter', // default value if you want
+                'type' => 'text',
+                'data' => 'string',
+                'name' => 'app_name',
+                'label' => 'App Name',
+                'rules' => 'required|min:2|max:50',
+                'class' => '',
+                'value' => 'Desa Dukuhlor',
             ],
             [
-                'type' => 'text', // input fields type
-                'data' => 'text', // data type, string, int, boolean
-                'name' => 'app_description', // unique name for field
-                'label' => 'App Description', // you know what label it is
-                'rules' => 'nullable', // validation rule of laravel
-                'class' => '', // any class for input
-                'value' => 'Laravel Starter is a CMS like modular starter application project built with Laravel. This starter project can be used as a foundation to build your own projects.', // default value if you want
+                'type' => 'text',
+                'data' => 'text',
+                'name' => 'app_description',
+                'label' => 'App Description',
+                'rules' => 'nullable',
+                'class' => '',
+                'value' => 'Website resmi Pemerintah Desa Dukuhlor, Kecamatan Kuningan, Kabupaten Kuningan, Jawa Barat. Menyajikan informasi profil desa, layanan publik, berita, dan pengumuman.',
             ],
             [
-                'type' => 'text', // input fields type
-                'data' => 'string', // data type, string, int, boolean
-                'name' => 'footer_text', // unique name for field
-                'label' => 'Footer Text', // you know what label it is
-                'rules' => 'required|min:2', // validation rule of laravel
-                'class' => '', // any class for input
-                'value' => '<a href="https://github.com/nasirkhan/laravel-starter/" class="text-muted">Built with ♥ from Bangladesh</a>', // default value if you want
+                'type' => 'text',
+                'data' => 'string',
+                'name' => 'footer_text',
+                'label' => 'Footer Text',
+                'rules' => 'required|min:2',
+                'class' => '',
+                'value' => '© '.date('Y').' Desa Dukuhlor. All rights reserved.',
             ],
             [
-                'type' => 'checkbox', // input fields type
-                'data' => 'text', // data type, string, int, boolean
-                'name' => 'show_copyright', // unique name for field
-                'label' => 'Show Copyright', // you know what label it is
-                'rules' => 'nullable', // validation rule of laravel
-                'class' => '', // any class for input
-                'value' => '1', // default value if you want
+                'type' => 'checkbox',
+                'data' => 'text',
+                'name' => 'show_copyright',
+                'label' => 'Show Copyright',
+                'rules' => 'nullable',
+                'class' => '',
+                'value' => '1',
             ],
         ],
     ],
@@ -52,16 +52,15 @@ return [
 
         'elements' => [
             [
-                'type' => 'email', // input fields type
-                'data' => 'string', // data type, string, int, boolean
-                'name' => 'email', // unique name for field
-                'label' => 'Email', // you know what label it is
-                'rules' => 'required|email', // validation rule of laravel
-                'class' => '', // any class for input
-                'value' => 'info@example.com', // default value if you want
+                'type' => 'email',
+                'data' => 'string',
+                'name' => 'email',
+                'label' => 'Email',
+                'rules' => 'required|email',
+                'class' => '',
+                'value' => 'desa.dukuhlor@kuningankab.go.id',
             ],
         ],
-
     ],
     'social' => [
         'title' => 'Social Profiles',
@@ -70,148 +69,147 @@ return [
 
         'elements' => [
             [
-                'type' => 'text', // input fields type
-                'data' => 'string', // data type, string, int, boolean
-                'name' => 'website_url', // unique name for field
-                'label' => 'Website URL', // you know what label it is
-                'rules' => 'nullable|max:191', // validation rule of laravel
-                'class' => '', // any class for input
-                'value' => 'https://nasirkhn.com', // default value if you want
+                'type' => 'text',
+                'data' => 'string',
+                'name' => 'website_url',
+                'label' => 'Website URL',
+                'rules' => 'nullable|max:191',
+                'class' => '',
+                'value' => '#',
             ],
             [
-                'type' => 'text', // input fields type
-                'data' => 'string', // data type, string, int, boolean
-                'name' => 'facebook_url', // unique name for field
-                'label' => 'Facebook Page URL', // you know what label it is
-                'rules' => 'nullable|max:191', // validation rule of laravel
-                'class' => '', // any class for input
-                'value' => '#', // default value if you want
+                'type' => 'text',
+                'data' => 'string',
+                'name' => 'facebook_url',
+                'label' => 'Facebook Page URL',
+                'rules' => 'nullable|max:191',
+                'class' => '',
+                'value' => '#',
             ],
             [
-                'type' => 'text', // input fields type
-                'data' => 'string', // data type, string, int, boolean
-                'name' => 'twitter_url', // unique name for field
-                'label' => 'Twitter Profile URL', // you know what label it is
-                'rules' => 'nullable|max:191', // validation rule of laravel
-                'class' => '', // any class for input
-                'value' => 'https://twitter.com/nasirkhansaikat', // default value if you want
+                'type' => 'text',
+                'data' => 'string',
+                'name' => 'twitter_url',
+                'label' => 'Twitter Profile URL',
+                'rules' => 'nullable|max:191',
+                'class' => '',
+                'value' => '#',
             ],
             [
-                'type' => 'text', // input fields type
-                'data' => 'string', // data type, string, int, boolean
-                'name' => 'instagram_url', // unique name for field
-                'label' => 'Instagram Account URL', // you know what label it is
-                'rules' => 'nullable|max:191', // validation rule of laravel
-                'class' => '', // any class for input
-                'value' => 'https://www.instagram.com/nasirkhansaikat', // default value if you want
+                'type' => 'text',
+                'data' => 'string',
+                'name' => 'instagram_url',
+                'label' => 'Instagram Account URL',
+                'rules' => 'nullable|max:191',
+                'class' => '',
+                'value' => '#',
             ],
             [
-                'type' => 'text', // input fields type
-                'data' => 'string', // data type, string, int, boolean
-                'name' => 'youtube_url', // unique name for field
-                'label' => 'Youtube Channel URL', // you know what label it is
-                'rules' => 'nullable|max:191', // validation rule of laravel
-                'class' => '', // any class for input
-                'value' => 'https://www.youtube.com/@nasirkhan', // default value if you want
+                'type' => 'text',
+                'data' => 'string',
+                'name' => 'youtube_url',
+                'label' => 'Youtube Channel URL',
+                'rules' => 'nullable|max:191',
+                'class' => '',
+                'value' => '#',
             ],
             [
-                'type' => 'text', // input fields type
-                'data' => 'string', // data type, string, int, boolean
-                'name' => 'linkedin_url', // unique name for field
-                'label' => 'LinkedIn URL', // you know what label it is
-                'rules' => 'nullable|max:191', // validation rule of laravel
-                'class' => '', // any class for input
-                'value' => '#', // default value if you want
+                'type' => 'text',
+                'data' => 'string',
+                'name' => 'linkedin_url',
+                'label' => 'LinkedIn URL',
+                'rules' => 'nullable|max:191',
+                'class' => '',
+                'value' => '#',
             ],
             [
-                'type' => 'text', // input fields type
-                'data' => 'string', // data type, string, int, boolean
-                'name' => 'whatsapp_url', // unique name for field
-                'label' => 'WhatsApp URL', // you know what label it is
-                'rules' => 'nullable|max:191', // validation rule of laravel
-                'class' => '', // any class for input
-                'value' => '#', // default value if you want
+                'type' => 'text',
+                'data' => 'string',
+                'name' => 'whatsapp_url',
+                'label' => 'WhatsApp URL',
+                'rules' => 'nullable|max:191',
+                'class' => '',
+                'value' => '#',
             ],
             [
-                'type' => 'text', // input fields type
-                'data' => 'string', // data type, string, int, boolean
-                'name' => 'messenger_url', // unique name for field
-                'label' => 'Messenger URL', // you know what label it is
-                'rules' => 'nullable|max:191', // validation rule of laravel
-                'class' => '', // any class for input
-                'value' => '#', // default value if you want
+                'type' => 'text',
+                'data' => 'string',
+                'name' => 'messenger_url',
+                'label' => 'Messenger URL',
+                'rules' => 'nullable|max:191',
+                'class' => '',
+                'value' => '#',
             ],
         ],
-
     ],
     'meta' => [
-        'title' => 'Meta ',
+        'title' => 'Meta',
         'desc' => 'Application Meta Data',
         'icon' => 'fa-solid fa-earth-asia',
 
         'elements' => [
             [
-                'type' => 'text', // input fields type
-                'data' => 'text', // data type, string, int, boolean
-                'name' => 'meta_site_name', // unique name for field
-                'label' => 'Meta Site Name', // you know what label it is
-                'rules' => 'required', // validation rule of laravel
-                'class' => '', // any class for input
-                'value' => 'Laravel Starter | An Awesome Laravel Starter Project', // default value if you want
+                'type' => 'text',
+                'data' => 'text',
+                'name' => 'meta_site_name',
+                'label' => 'Meta Site Name',
+                'rules' => 'required',
+                'class' => '',
+                'value' => 'Desa Dukuhlor | Pemerintah Desa Dukuhlor',
             ],
             [
-                'type' => 'text', // input fields type
-                'data' => 'text', // data type, string, int, boolean
-                'name' => 'meta_description', // unique name for field
-                'label' => 'Meta Description', // you know what label it is
-                'rules' => 'nullable', // validation rule of laravel
-                'class' => '', // any class for input
-                'value' => 'Laravel Starter is a CMS like modular starter application project built with latest Laravel. This starter project can be used as a foundation to build your own projects.', // default value if you want
+                'type' => 'text',
+                'data' => 'text',
+                'name' => 'meta_description',
+                'label' => 'Meta Description',
+                'rules' => 'nullable',
+                'class' => '',
+                'value' => 'Website resmi Pemerintah Desa Dukuhlor, Kecamatan Kuningan, Kabupaten Kuningan, Jawa Barat. Informasi profil desa, layanan publik, berita, dan pengumuman.',
             ],
             [
-                'type' => 'text', // input fields type
-                'data' => 'text', // data type, string, int, boolean
-                'name' => 'meta_keyword', // unique name for field
-                'label' => 'Meta Keyword', // you know what label it is
-                'rules' => 'nullable', // validation rule of laravel
-                'class' => '', // any class for input
-                'value' => 'Web Application, web app, Laravel, Laravel starter, Bootstrap, Admin, Template, Open Source, nasir khan saikat, nasirkhansaikat', // default value if you want
+                'type' => 'text',
+                'data' => 'text',
+                'name' => 'meta_keyword',
+                'label' => 'Meta Keyword',
+                'rules' => 'nullable',
+                'class' => '',
+                'value' => 'desa dukuhlor, kuningan, jawa barat, pemerintah desa, profil desa, layanan publik, berita desa',
             ],
             [
-                'type' => 'text', // input fields type
-                'data' => 'text', // data type, string, int, boolean
-                'name' => 'meta_image', // unique name for field
-                'label' => 'Meta Image', // you know what label it is
-                'rules' => 'required', // validation rule of laravel
-                'class' => '', // any class for input
-                'value' => 'img/default_banner.jpg', // default value if you want
+                'type' => 'text',
+                'data' => 'text',
+                'name' => 'meta_image',
+                'label' => 'Meta Image',
+                'rules' => 'required',
+                'class' => '',
+                'value' => 'img/default_banner.jpg',
             ],
             [
-                'type' => 'text', // input fields type
-                'data' => 'text', // data type, string, int, boolean
-                'name' => 'meta_fb_app_id', // unique name for field
-                'label' => 'Meta Facebook App Id', // you know what label it is
-                'rules' => 'nullable', // validation rule of laravel
-                'class' => '', // any class for input
-                'value' => '569561286532601', // default value if you want
+                'type' => 'text',
+                'data' => 'text',
+                'name' => 'meta_fb_app_id',
+                'label' => 'Meta Facebook App Id',
+                'rules' => 'nullable',
+                'class' => '',
+                'value' => '',
             ],
             [
-                'type' => 'text', // input fields type
-                'data' => 'text', // data type, string, int, boolean
-                'name' => 'meta_twitter_site', // unique name for field
-                'label' => 'Meta Twitter Site Account', // you know what label it is
-                'rules' => 'nullable', // validation rule of laravel
-                'class' => '', // any class for input
-                'value' => '@nasirkhansaikat', // default value if you want
+                'type' => 'text',
+                'data' => 'text',
+                'name' => 'meta_twitter_site',
+                'label' => 'Meta Twitter Site Account',
+                'rules' => 'nullable',
+                'class' => '',
+                'value' => '',
             ],
             [
-                'type' => 'text', // input fields type
-                'data' => 'text', // data type, string, int, boolean
-                'name' => 'meta_twitter_creator', // unique name for field
-                'label' => 'Meta Twitter Creator Account', // you know what label it is
-                'rules' => 'nullable', // validation rule of laravel
-                'class' => '', // any class for input
-                'value' => '@nasirkhansaikat', // default value if you want
+                'type' => 'text',
+                'data' => 'text',
+                'name' => 'meta_twitter_creator',
+                'label' => 'Meta Twitter Creator Account',
+                'rules' => 'nullable',
+                'class' => '',
+                'value' => '',
             ],
         ],
     ],
@@ -222,17 +220,16 @@ return [
 
         'elements' => [
             [
-                'type' => 'text', // input fields type
-                'data' => 'text', // data type, string, int, boolean
-                'name' => 'google_analytics', // unique name for field
-                'label' => 'Google Analytics (gtag)', // you know what label it is
-                'rules' => 'nullable', // validation rule of laravel
-                'class' => '', // any class for input
-                'value' => 'G-ABCDE12345', // default value if you want
-                'help' => 'Paste the only the Measurement Id of Google Analytics stream.', // Help text for the input field.
+                'type' => 'text',
+                'data' => 'text',
+                'name' => 'google_analytics',
+                'label' => 'Google Analytics (gtag)',
+                'rules' => 'nullable',
+                'class' => '',
+                'value' => '',
+                'help' => 'Paste the only the Measurement Id of Google Analytics stream.',
             ],
         ],
-
     ],
     'custom_css' => [
         'title' => 'Custom Code',
@@ -241,17 +238,16 @@ return [
 
         'elements' => [
             [
-                'type' => 'textarea', // input fields type
-                'data' => 'string', // data type, string, int, boolean
-                'name' => 'custom_css_block', // unique name for field
-                'label' => 'Custom Css Code', // you know what label it is
-                'rules' => 'nullable', // validation rule of laravel
-                'class' => '', // any class for input
-                'value' => '', // default value if you want
-                'help' => 'Paste the code in this field.', // Help text for the input field.
-                'display' => 'raw', // Help text for the input field.
+                'type' => 'textarea',
+                'data' => 'string',
+                'name' => 'custom_css_block',
+                'label' => 'Custom Css Code',
+                'rules' => 'nullable',
+                'class' => '',
+                'value' => '',
+                'help' => 'Paste the code in this field.',
+                'display' => 'raw',
             ],
         ],
-
     ],
 ];

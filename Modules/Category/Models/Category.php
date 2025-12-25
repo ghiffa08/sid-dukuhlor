@@ -15,37 +15,40 @@ class Category extends BaseModel
 
     protected $table = 'categories';
 
-    /**
-     * The attributes that should be cast.
-     */
+    protected $fillable = [
+        'name',
+        'slug',
+        'description',
+        'image',
+        'meta_title',
+        'meta_description',
+        'meta_keyword',
+        'order',
+        'status',
+        'created_by',
+        'updated_by',
+        'deleted_by',
+        'group_name'
+    ];
+
     protected function casts(): array
     {
         return array_merge(parent::casts(), [
             'status' => CategoryStatus::class,
+            'order' => 'integer',
         ]);
     }
 
-    /**
-     * Override the active scope to work with CategoryStatus enum.
-     */
     public function scopeActive(Builder $query): void
     {
         $query->where('status', CategoryStatus::Active->value);
     }
 
-    /**
-     * Categories has Many posts.
-     */
     public function posts()
     {
         return $this->hasMany('Modules\Post\Models\Post');
     }
 
-    /**
-     * Create a new factory instance for the model.
-     *
-     * @return \Illuminate\Database\Eloquent\Factories\Factory
-     */
     protected static function newFactory()
     {
         return \Modules\Category\database\factories\CategoryFactory::new();

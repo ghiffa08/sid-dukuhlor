@@ -85,6 +85,7 @@ return [
     'faker_locale' => env('APP_FAKER_LOCALE', 'en_US'),
 
     'available_locales' => [
+        'id' => 'Bahasa Indonesia (ID)',
         'ar' => 'العربی (AR)',
         'bn' => 'বাংলা (BN)',
         'en' => 'English (EN)',

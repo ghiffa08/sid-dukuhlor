@@ -1,123 +1,103 @@
 <div>
-    <section class="bg-white dark:bg-gray-800">
-        <div class="mx-auto max-w-7xl px-4 py-24 text-center sm:px-12">
-            <div class="m-6 flex justify-center">
-                <img class="h-24 rounded-sm" src="{{ asset('img/logo-square.jpg') }}" alt="{{ app_name() }}" />
-            </div>
-            <h1
-                class="mb-6 text-4xl font-extrabold leading-none tracking-tight text-gray-900 sm:text-6xl dark:text-white"
-            >
-                {{ app_name() }}
-            </h1>
-            <p class="mb-10 text-lg font-normal text-gray-500 sm:px-16 sm:text-2xl xl:px-48 dark:text-gray-400">
-                {!! setting('app_description') !!}
-            </p>
-            <div class="mb-8 flex flex-col space-y-4 sm:flex-row sm:justify-center sm:space-x-4 sm:space-y-0 lg:mb-16">
-                <a
-                    class="inline-flex items-center justify-center rounded-lg bg-gray-700 px-5 py-3 text-center text-base font-medium text-white hover:bg-gray-800 focus:ring-4 focus:ring-gray-300"
-                    href="https://github.com/nasirkhan/laravel-starter"
-                    target="_blank"
-                >
-                    <svg
-                        class="icon icon-tabler icons-tabler-outline icon-tabler-brand-github"
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="24"
-                        height="24"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                    >
-                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                        <path
-                            d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5"
-                        />
-                    </svg>
-                    <span class="ms-2">Github</span>
-                </a>
-                <a
-                    class="inline-flex items-center justify-center rounded-lg border border-gray-300 bg-white px-5 py-3 text-center text-base font-medium text-gray-900 hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 dark:border-gray-700 dark:text-gray-700 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:ring-gray-800"
-                    href="https://nasirkhn.com"
-                    target="_blank"
-                >
-                    <svg
-                        class="icon icon-tabler icons-tabler-outline icon-tabler-world-www"
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="24"
-                        height="24"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                    >
-                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                        <path d="M19.5 7a9 9 0 0 0 -7.5 -4a8.991 8.991 0 0 0 -7.484 4" />
-                        <path d="M11.5 3a16.989 16.989 0 0 0 -1.826 4" />
-                        <path d="M12.5 3a16.989 16.989 0 0 1 1.828 4" />
-                        <path d="M19.5 17a9 9 0 0 1 -7.5 4a8.991 8.991 0 0 1 -7.484 -4" />
-                        <path d="M11.5 21a16.989 16.989 0 0 1 -1.826 -4" />
-                        <path d="M12.5 21a16.989 16.989 0 0 0 1.828 -4" />
-                        <path d="M2 10l1 4l1.5 -4l1.5 4l1 -4" />
-                        <path d="M17 10l1 4l1.5 -4l1.5 4l1 -4" />
-                        <path d="M9.5 10l1 4l1.5 -4l1.5 4l1 -4" />
-                    </svg>
-                    <span class="ms-2">Website</span>
-                </a>
-            </div>
+    @if ($carousels->count() > 0)
+    <section class="relative z-0">
+        @if ($carousels->count() > 0)
+        <section class="relative z-0">
+            <div id="hero-carousel" class="relative w-full" data-carousel="slide">
+                <div class="relative h-96 overflow-hidden md:h-[600px]">
+                    @foreach ($carousels as $index => $carousel)
 
-            @include('frontend.includes.messages')
+                    <div class="{{ $index === 0 ? '' : 'hidden' }} absolute inset-0 h-full w-full duration-700 ease-in-out" data-carousel-item>
+
+                        @php
+                        if (str_starts_with($carousel->featured_image, 'http')) {
+                        $imageUrl = $carousel->featured_image;
+                        } elseif (str_starts_with($carousel->featured_image, 'photos/')) {
+                        $imageUrl = asset('storage/'.$carousel->featured_image);
+                        } else {
+                        $imageUrl = asset($carousel->featured_image);
+                        }
+                        @endphp
+
+                        <div class="absolute inset-0">
+                            <img src="{{ $imageUrl }}" class="h-full w-full object-cover" alt="{{ $carousel->title }}">
+                        </div>
+
+                        <div class="absolute inset-0 flex items-center justify-center bg-gradient-to-b from-black/30 via-black/40 to-black/50">
+                            <div class="px-4 text-center text-white">
+                                <h2 class="mb-4 text-4xl font-bold drop-shadow-lg md:text-6xl">{{ $carousel->title }}</h2>
+                                @if ($carousel->description)
+                                <p class="mb-6 text-lg drop-shadow-md md:text-xl">{{ $carousel->description }}</p>
+                                @endif
+                                @if ($carousel->link)
+                                <a href="{{ $carousel->link }}" class="inline-block rounded-lg bg-blue-600 px-6 py-3 text-white shadow-lg transition hover:bg-blue-700 hover:shadow-xl">
+                                    Learn More
+                                </a>
+                                @endif
+                            </div>
+                        </div>
+                    </div>
+                    @endforeach
+                </div>
+
+                @if ($carousels->count() > 1)
+                <div class="absolute bottom-5 left-1/2 z-30 flex -translate-x-1/2 gap-3">
+                    @foreach ($carousels as $index => $carousel)
+                    <button type="button" class="h-3 w-3 rounded-full {{ $index === 0 ? 'bg-white' : 'bg-white/50' }}" aria-current="{{ $index === 0 ? 'true' : 'false' }}" aria-label="Slide {{ $index + 1 }}" data-carousel-slide-to="{{ $index }}"></button>
+                    @endforeach
+                </div>
+                <button type="button" class="group absolute left-0 top-0 z-30 flex h-full cursor-pointer items-center justify-center px-4 focus:outline-none" data-carousel-prev>
+                    <span class="inline-flex h-10 w-10 items-center justify-center rounded-full bg-white/30 group-hover:bg-white/50 group-focus:outline-none group-focus:ring-4 group-focus:ring-white dark:bg-gray-800/30 dark:group-hover:bg-gray-800/60 dark:group-focus:ring-gray-800/70">
+                        <svg class="h-4 w-4 text-white rtl:rotate-180 dark:text-gray-800" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 1 1 5l4 4" />
+                        </svg>
+                        <span class="sr-only">Previous</span>
+                    </span>
+                </button>
+                <button type="button" class="group absolute right-0 top-0 z-30 flex h-full cursor-pointer items-center justify-center px-4 focus:outline-none" data-carousel-next>
+                    <span class="inline-flex h-10 w-10 items-center justify-center rounded-full bg-white/30 group-hover:bg-white/50 group-focus:outline-none group-focus:ring-4 group-focus:ring-white dark:bg-gray-800/30 dark:group-hover:bg-gray-800/60 dark:group-focus:ring-gray-800/70">
+                        <svg class="h-4 w-4 text-white rtl:rotate-180 dark:text-gray-800" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4" />
+                        </svg>
+                        <span class="sr-only">Next</span>
+                    </span>
+                </button>
+                @endif
+            </div>
+        </section>
+        @endif
+    </section>
+    @else
+    <section class="relative z-0 bg-gradient-to-r from-blue-600 to-blue-800">
+        <div class="flex h-96 items-center justify-center text-center text-white md:h-[600px]">
+            <div>
+                <h2 class="mb-4 text-4xl font-bold md:text-6xl">Welcome to {{ config('app.name') }}</h2>
+                <p class="mb-6 text-lg md:text-xl">Your trusted platform for excellence</p>
+            </div>
+        </div>
+    </section>
+    @endif
+
+    <section class="bg-white py-20 dark:bg-gray-800">
+        <div class="mx-auto max-w-7xl px-4 text-center sm:px-12">
+            <h2 class="mb-4 text-3xl font-bold">Welcome to {{ config('app.name') }}</h2>
+            <p class="text-lg text-gray-600 dark:text-gray-400">Your trusted platform for excellence</p>
         </div>
     </section>
 
     <section class="bg-gray-100 py-20 text-gray-600 dark:bg-gray-700 dark:text-gray-400">
         <div class="container mx-auto flex flex-col items-center justify-center px-5">
-            <div class="w-full text-center lg:w-2/3">
-                <h1 class="mb-4 text-3xl font-medium text-gray-800 sm:text-4xl dark:text-gray-200">
-                    {{ __('Screenshots of the project') }}
-                </h1>
-
-                <p class="mb-8 leading-relaxed">
-                    In the following section we listed a number of screenshots of different parts of the project,
-                    Laravel Starter.
-                </p>
-            </div>
+            <h2 class="mb-8 text-3xl font-bold">Our Services</h2>
         </div>
     </section>
 
     <section class="bg-gray-50 pb-20 dark:bg-gray-700">
         <div class="grid grid-cols-1 gap-4 p-5 sm:grid-cols-2">
-            <div class="rounded-lg p-3 shadow-lg sm:p-10 dark:bg-gray-800">
-                <img
-                    loading="lazy"
-                    src="https://github.com/nasirkhan/laravel-starter/assets/396987/1cf5ce5a-f374-4bae-b5a3-69e8d7ff684d"
-                    alt="Page preview"
-                />
-            </div>
-            <div class="rounded-lg p-3 shadow-lg sm:p-10 dark:bg-gray-800">
-                <img
-                    loading="lazy"
-                    src="https://github.com/nasirkhan/laravel-starter/assets/396987/93341711-60dd-4624-8cd7-82f1c611287d"
-                    alt="Page preview"
-                />
-            </div>
-            <div class="rounded-lg p-3 shadow-lg sm:p-10 dark:bg-gray-800">
-                <img
-                    loading="lazy"
-                    src="https://github.com/nasirkhan/laravel-starter/assets/396987/0f6b8201-6f6a-429f-894b-4e491cc5eba4"
-                    alt="Page preview"
-                />
-            </div>
-            <div class="rounded-lg p-3 shadow-lg sm:p-10 dark:bg-gray-800">
-                <img
-                    loading="lazy"
-                    src="https://github.com/nasirkhan/laravel-starter/assets/396987/f8131011-2ecc-4a11-961f-85e02cb8f7a1"
-                    alt="Page preview"
-                />
-            </div>
+            <!-- Add content here -->
         </div>
     </section>
 </div>
+
+@push('after-scripts')
+<script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.js"></script>
+@endpush

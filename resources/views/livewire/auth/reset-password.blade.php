@@ -1,5 +1,5 @@
 <div class="flex flex-col gap-6">
-    <x-auth-header :title="__('Reset password')" :description="__('Please enter your new password below')" />
+    <x-auth-header :title="__('Atur Ulang Kata Sandi')" :description="__('Silakan masukkan kata sandi baru Anda di bawah ini')" />
 
     <!-- Session Status -->
     <x-auth-session-status class="text-center" :status="session('status')" />
@@ -8,7 +8,7 @@
         {{-- Email Address --}}
         @php
             $field_name = "email";
-            $filed_label = __("Email Address");
+            $filed_label = __("Alamat Email");
             $field_placeholder = $filed_label;
             $required = "required";
         @endphp
@@ -23,7 +23,7 @@
         {{-- Password --}}
         @php
             $field_name = "password";
-            $filed_label = __("Password");
+            $filed_label = __("Kata Sandi");
             $field_placeholder = $filed_label;
             $required = "required";
         @endphp
@@ -38,7 +38,7 @@
         {{-- Confirm Password --}}
         @php
             $field_name = "password_confirmation";
-            $filed_label = __("Confirm Password");
+            $filed_label = __("Konfirmasi Kata Sandi");
             $field_placeholder = $filed_label;
             $required = "required";
         @endphp
@@ -52,7 +52,7 @@
 
         <div class="flex items-center justify-end">
             <x-button class="w-full" variant="primary" type="submit">
-                {{ __("Reset password") }}
+                {{ __("Atur Ulang Kata Sandi") }}
             </x-button>
         </div>
     </form>

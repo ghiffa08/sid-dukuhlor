@@ -15,6 +15,7 @@ use App\Livewire\Frontend\Users\ChangePassword;
 use App\Livewire\Frontend\Users\Profile;
 use App\Livewire\Frontend\Users\ProfileEdit;
 use Illuminate\Support\Facades\Route;
+use Modules\Carousel\Http\Controllers\Backend\CarouselsController;
 
 /*
 *
@@ -142,6 +143,20 @@ Route::group(['prefix' => 'admin', 'as' => 'backend.', 'middleware' => ['auth', 
     Route::patch("{$module_name}/{id}/block", [BackendUserController::class, 'block'])->name("{$module_name}.block")->middleware('can:block_users');
     Route::patch("{$module_name}/{id}/unblock", [BackendUserController::class, 'unblock'])->name("{$module_name}.unblock")->middleware('can:block_users');
     Route::resource("{$module_name}", BackendUserController::class);
+
+    /**
+     * Carousel Module Routes
+     * --------------------------------------------------------------------
+     */
+    Route::group(['prefix' => 'carousels', 'as' => 'carousels.'], function () {
+        Route::get('/', [CarouselsController::class, 'index'])->name('index');
+        Route::get('/create', [CarouselsController::class, 'create'])->name('create');
+        Route::post('/', [CarouselsController::class, 'store'])->name('store');
+        Route::get('/{id}', [CarouselsController::class, 'show'])->name('show');
+        Route::get('/{id}/edit', [CarouselsController::class, 'edit'])->name('edit');
+        Route::patch('/{id}', [CarouselsController::class, 'update'])->name('update');
+        Route::delete('/{id}', [CarouselsController::class, 'destroy'])->name('destroy');
+    });
 });
 
 /**

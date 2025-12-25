@@ -2,12 +2,9 @@
 
 namespace App\Livewire\Frontend;
 
-use Livewire\Attributes\Layout;
-use Livewire\Attributes\Title;
 use Livewire\Component;
+use Modules\Carousel\Models\Carousel;
 
-#[Layout('components.layouts.frontend')]
-#[Title('Home')]
 class Home extends Component
 {
     /**
@@ -17,6 +14,13 @@ class Home extends Component
      */
     public function render()
     {
-        return view('livewire.frontend.home');
+        $carousels = Carousel::query()
+            ->active()
+            ->ordered()
+            ->get();
+
+        return view('livewire.frontend.home', [
+            'carousels' => $carousels,
+        ]);
     }
 }

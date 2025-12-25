@@ -20,15 +20,12 @@
                     {{ __($module_name) }} Management Dashboard
                 </div>
             </div>
-            <!--/.col-->
             <div class="col-4">
                 <div class="btn-toolbar float-end" role="toolbar" aria-label="Toolbar with button groups">
                     <a href="{{ route('backend.menuitems.create') }}" class="btn btn-success btn-sm ms-1" data-toggle="tooltip" title="{{ __($module_action) }} {{ __($module_title) }}"><i class="fas fa-plus-circle"></i> New Menu Item</a>
                 </div>
             </div>
-            <!--/.col-->
         </div>
-        <!--/.row-->
 
         <div class="row mt-4">
             <div class="col">
@@ -36,9 +33,7 @@
                     <table id="datatable" class="table table-bordered table-hover table-responsive-sm">
                         <thead>
                             <tr>
-                                <th>
-                                    #
-                                </th>
+                                <th>#</th>
                                 <th>Menu</th>
                                 <th>Name</th>
                                 <th>Type</th>
@@ -58,7 +53,7 @@
         <div class="row">
             <div class="col-7">
                 <div class="float-left">
-                    Total {{ $$module_name_singular->count() }} {{ __($module_title) }}
+                    <span id="total-records">Loading...</span>
                 </div>
             </div>
             <div class="col-5">
@@ -72,44 +67,46 @@
 
 @endsection
 
-@push ('after-styles')
-<!-- DataTables Core and Extensions -->
+@push('after-styles')
 <link rel="stylesheet" type="text/css" href="{{ asset('vendor/datatable/datatables.min.css') }}">
-
 @endpush
 
-@push ('after-scripts')
-<!-- DataTables Core and Extensions -->
+@push('after-scripts')
 <script type="text/javascript" src="{{ asset('vendor/datatable/datatables.min.js') }}"></script>
 
 <script type="text/javascript">
-        
-    $('#datatable').DataTable({
+    const table = $('#datatable').DataTable({
         processing: true,
         serverSide: true,
         autoWidth: true,
         responsive: true,
         ajax: {
-            url: '{{ route('backend.menuitems.index_data') }}',
+            url: '{{ route("backend.menuitems.index_data") }}',
         },
-        columns: [
-            {data: 'id', name: 'id'},
-            {data: 'menu_name', name: 'menu.name', searchable: true},
+        columns: [{
+                data: 'id',
+                name: 'id'
+            },
             {
-                data: 'name_with_hierarchy', 
-                name: 'name', 
+                data: 'menu_name',
+                name: 'menu.name',
+                searchable: true
+            },
+            {
+                data: 'name_with_hierarchy',
+                name: 'name',
                 render: function(data, type, row) {
                     let indent = '';
                     for (let i = 0; i < row.level; i++) {
                         indent += '&nbsp;&nbsp;&nbsp;&nbsp;';
                     }
-                    let icon = row.icon ? '<i class="' + row.icon + '"></i> ' : '';
+                    const icon = row.icon ? '<i class="' + row.icon + '"></i> ' : '';
                     return indent + icon + data;
                 },
                 searchable: true
             },
             {
-                data: 'type', 
+                data: 'type',
                 name: 'type',
                 render: function(data) {
                     const typeLabels = {
@@ -123,7 +120,7 @@
                 }
             },
             {
-                data: 'parent_name', 
+                data: 'parent_name',
                 name: 'parent.name',
                 searchable: true,
                 render: function(data) {
@@ -131,7 +128,7 @@
                 }
             },
             {
-                data: 'url_display', 
+                data: 'url_display',
                 name: 'url',
                 render: function(data, type, row) {
                     if (row.route_name) {
@@ -144,19 +141,18 @@
                 searchable: false
             },
             {
-                data: 'sort_order', 
+                data: 'sort_order',
                 name: 'sort_order',
                 render: function(data) {
                     return '<span class="badge bg-light text-dark">' + (data || 0) + '</span>';
                 }
             },
             {
-                data: 'status_badge', 
+                data: 'status_badge',
                 name: 'status',
                 render: function(data, type, row) {
                     let badges = '';
-                    
-                    // Status badge
+
                     if (row.status == 1) {
                         badges += '<span class="badge bg-success">Published</span> ';
                     } else if (row.status == 0) {
@@ -164,26 +160,36 @@
                     } else {
                         badges += '<span class="badge bg-warning">Draft</span> ';
                     }
-                    
-                    // Active badge
+
                     if (row.is_active) {
                         badges += '<span class="badge bg-info">Active</span> ';
                     }
-                    
-                    // Visible badge
+
                     if (row.is_visible) {
                         badges += '<span class="badge bg-primary">Visible</span>';
                     }
-                    
+
                     return badges;
                 },
                 searchable: false
             },
-            {data: 'action', name: 'action', orderable: false, searchable: false, className: 'text-end'}
+            {
+                data: 'action',
+                name: 'action',
+                orderable: false,
+                searchable: false,
+                className: 'text-end'
+            }
         ],
-        order: [[1, 'asc'], [6, 'asc']] // Order by menu name, then sort order
+        order: [
+            [1, 'asc'],
+            [6, 'asc']
+        ],
+        drawCallback: function(settings) {
+            const info = table.page.info();
+            $('#total-records').text('Total ' + info.recordsTotal + ' {{ __($module_title) }}');
+        }
     });
-        
 </script>
 
 @endpush

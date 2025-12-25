@@ -1,7 +1,7 @@
 <div class="flex flex-col gap-6">
     <x-auth-header
-        :title="__('Forgot password')"
-        :description="__('Enter your email to receive a password reset link')"
+        :title="__('Lupa Kata Sandi')"
+        :description="__('Masukkan email Anda untuk menerima tautan reset kata sandi')"
     />
 
     <!-- Session Status -->
@@ -11,7 +11,7 @@
         <!-- Email Address -->
         @php
             $field_name = "email";
-            $filed_label = __("Email Address");
+            $filed_label = __("Alamat Email");
             $field_placeholder = $filed_label;
             $required = "required";
         @endphp
@@ -25,15 +25,15 @@
 
         <div class="flex items-center justify-end">
             <x-button class="w-full" variant="primary" type="submit">
-                {{ __("Email password reset link") }}
+                {{ __("Kirim Link Reset Password") }}
             </x-button>
         </div>
     </form>
 
     <div class="space-x-1 text-center text-sm text-zinc-600">
-        {{ __("Or, return to") }}
+        {{ __("Atau, kembali ke") }}
         <x-frontend.link class="text-sm" :href="route('login')" wire:navigate>
-            {{ __("log in") }}
+            {{ __("masuk") }}
         </x-frontend.link>
     </div>
 </div>
