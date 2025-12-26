@@ -36,6 +36,11 @@ class Post extends BaseModel
         return $this->belongsTo('Modules\Category\Models\Category');
     }
 
+    public function user()
+    {
+        return $this->belongsTo(\App\Models\User::class, 'created_by');
+    }
+
     public function tags()
     {
         return $this->morphToMany('Modules\Tag\Models\Tag', 'taggable');

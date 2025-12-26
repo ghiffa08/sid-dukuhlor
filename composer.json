@@ -1,15 +1,16 @@
 {
-    "name": "nasirkhan/laravel-starter",
-    "description": "A CMS like modular Laravel starter project.",
+    "name": "desa-dukuhlor/sid-dukuhlor",
+    "description": "Sistem Informasi Desa Dukuhlor - A modular CMS for village information management.",
     "keywords": [
         "framework",
         "laravel",
         "cms",
-        "starter",
-        "admin",
+        "desa",
+        "sistem informasi desa",
+        "village information system",
         "admin dashboard",
-        "laravel blog",
-        "website"
+        "transparansi desa",
+        "profil desa"
     ],
     "license": "GPL-3.0-or-later",
     "type": "project",

@@ -157,6 +157,14 @@ Route::group(['prefix' => 'admin', 'as' => 'backend.', 'middleware' => ['auth', 
         Route::patch('/{id}', [CarouselsController::class, 'update'])->name('update');
         Route::delete('/{id}', [CarouselsController::class, 'destroy'])->name('destroy');
     });
+
+    /**
+     * Landing Page CMS Routes
+     */
+    Route::group(['prefix' => 'landing-page', 'as' => 'landing_page.'], function () {
+        Route::get('/', [\Modules\Carousel\Http\Controllers\Backend\LandingPageController::class, 'index'])->name('index');
+        Route::post('/', [\Modules\Carousel\Http\Controllers\Backend\LandingPageController::class, 'store'])->name('store');
+    });
 });
 
 /**

@@ -78,18 +78,23 @@
                                     $row_class = "table-info";
                                     $span_class = "font-weight-bold";
                                 }
+                                $data = $module_name_singular->data;
+                                // Handle both array (if casted) and object/string usage if needed, though index usually works with casted array
+                                // But safely access keys
+                                $title = $data['title'] ?? $data['message'] ?? 'Notification';
+                                $module = $data['module'] ?? 'System';
                                 ?>
 
                                 <tr class="{{ $row_class }}">
                                     <td>
                                         <a href="{{ route("backend.$module_name.show", $module_name_singular->id) }}">
                                             <span class="{{ $span_class }}">
-                                                {{ $module_name_singular->data["title"] }}
+                                                {{ $title }}
                                             </span>
                                         </a>
                                     </td>
                                     <td>
-                                        {{ $module_name_singular->data["module"] }}
+                                        {{ $module }}
                                     </td>
                                     <td>
                                         {{ $module_name_singular->updated_at->diffForHumans() }}

@@ -77,8 +77,19 @@ class PostsController extends BackendBaseController
         $data = Arr::except($validated_data, 'tags_list');
         $data['created_by_name'] = Auth::user()->name;
 
+        // Post Approval Workflow: Force Pending for non-Kades
+        if (! Auth::user()->hasRole('kades') && $data['status'] === PostStatus::Published->value) {
+            $data['status'] = PostStatus::Pending->value;
+        }
+
         $$module_name_singular = $module_model::create($data);
         $$module_name_singular->tags()->attach($request->input('tags_list'));
+
+        // Notification for Kades if Pending
+        if ($$module_name_singular->status === PostStatus::Pending->value) {
+            $kadesUsers = \App\Models\User::role('kades')->get();
+            \Illuminate\Support\Facades\Notification::send($kadesUsers, new \Modules\Post\Notifications\PostPendingApproval($$module_name_singular));
+        }
 
         flash("New '".Str::singular($module_title)."' Added")->success()->important();
 
@@ -133,6 +144,11 @@ class PostsController extends BackendBaseController
 
         $$module_name_singular = $module_model::findOrFail($id);
 
+        // Post Approval Workflow: Force Pending for non-Kades
+        if (! Auth::user()->hasRole('kades') && $data['status'] === PostStatus::Published->value) {
+            $data['status'] = PostStatus::Pending->value;
+        }
+
         $$module_name_singular->update($data);
 
         if ($request->input('tags_list') === null) {
@@ -147,5 +163,38 @@ class PostsController extends BackendBaseController
         logUserAccess($module_title.' '.$module_action.' | Id: '.$$module_name_singular->id);
 
         return redirect()->route("backend.{$module_name}.show", $$module_name_singular->id);
+    }
+
+    /**
+     * Approve the specified resource.
+     *
+     * @param  int  $id
+     * @return RedirectResponse
+     */
+    public function approve($id)
+    {
+        if (! Auth::user()->hasRole('kades')) {
+            abort(403, 'Unauthorized action.');
+        }
+
+        $module_title = $this->module_title;
+        $module_name = $this->module_name;
+        $module_model = $this->module_model;
+        $module_name_singular = Str::singular($module_name);
+
+        $$module_name_singular = $module_model::findOrFail($id);
+        $$module_name_singular->update(['status' => PostStatus::Published->value]);
+
+        // Notify Author
+        $author = \App\Models\User::find($$module_name_singular->created_by);
+        if ($author) {
+            $author->notify(new \Modules\Post\Notifications\PostApproved($$module_name_singular));
+        }
+
+        flash(Str::singular($module_title)."' Approved Successfully")->success()->important();
+
+        logUserAccess($module_title.' Approved | Id: '.$$module_name_singular->id);
+
+        return redirect()->back();
     }
 }

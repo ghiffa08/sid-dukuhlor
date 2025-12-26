@@ -28,7 +28,17 @@
             :module_title="$module_title"
             :module_icon="$module_icon"
             :module_action="$module_action"
-        />
+        >
+            @if(auth()->user()->hasRole('kades') && $$module_name_singular->status === \Modules\Post\Enums\PostStatus::Pending->value)
+                <form action="{{ route("backend.$module_name.approve", $$module_name_singular->id) }}" method="POST" class="d-inline float-end">
+                    @csrf
+                    @method('PATCH')
+                    <button type="submit" class="btn btn-warning" data-toggle="tooltip" title="Approve {{ ucwords(Str::singular($module_name)) }}">
+                        <i class="fas fa-check"></i> Approve
+                    </button>
+                </form>
+            @endif
+        </x-backend.section-header>
 
         <div class="row mt-4">
             <div class="col-12 col-sm-8">

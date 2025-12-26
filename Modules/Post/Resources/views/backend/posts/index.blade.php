@@ -41,6 +41,9 @@
                                     <th>
                                         @lang("post::text.created_by")
                                     </th>
+                                    <th>
+                                        @lang("Status")
+                                    </th>
                                     <th class="text-end">
                                         @lang("post::text.action")
                                     </th>
@@ -67,7 +70,25 @@
                                         <td>
                                             {{ $module_name_singular->created_by }}
                                         </td>
+                                        <td>
+                                            @if($module_name_singular->status === \Modules\Post\Enums\PostStatus::Pending->value)
+                                                <span class="badge bg-warning text-dark">Pending</span>
+                                            @elseif($module_name_singular->status === \Modules\Post\Enums\PostStatus::Published->value)
+                                                <span class="badge bg-success">Published</span>
+                                            @else
+                                                <span class="badge bg-secondary">{{ $module_name_singular->status }}</span>
+                                            @endif
+                                        </td>
                                         <td class="text-end">
+                                            @if(auth()->user()->hasRole('kades') && $module_name_singular->status === \Modules\Post\Enums\PostStatus::Pending->value)
+                                                <form action="{{ route("backend.$module_name.approve", $module_name_singular->id) }}" method="POST" class="d-inline">
+                                                    @csrf
+                                                    @method('PATCH')
+                                                    <button type="submit" class="btn btn-sm btn-warning mt-1" data-toggle="tooltip" title="Approve {{ ucwords(Str::singular($module_name)) }}">
+                                                        <i class="fas fa-check"></i>
+                                                    </button>
+                                                </form>
+                                            @endif
                                             <a
                                                 class="btn btn-sm btn-primary mt-1"
                                                 data-toggle="tooltip"

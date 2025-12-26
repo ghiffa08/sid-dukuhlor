@@ -7,6 +7,7 @@ enum PostStatus: string
     case Published = 'Published';
     case Unpublished = 'Unpublished';
     case Draft = 'Draft';
+    case Pending = 'Pending';
 
     public static function getAllValues(): array
     {

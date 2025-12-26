@@ -1,57 +1,79 @@
 @extends('frontend.layouts.app')
 
-@section('title') {{ __($module_title) }} @endsection
+@section('title') {{ __($module_title) }} - Website Desa @endsection
 
 @section('content')
 <!-- Hero Section -->
-<section class="relative overflow-hidden bg-gradient-to-br from-blue-600 via-blue-700 to-blue-900 py-20 text-white">
-    <div class="absolute inset-0 bg-[url('/images/pattern.svg')] opacity-10"></div>
+<section class="relative z-0 bg-gradient-to-br from-blue-900 via-blue-800 to-cyan-800 py-20 text-white overflow-hidden">
+    <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-20"></div>
+    <div class="container relative mx-auto px-4 z-10">
+        <!-- Breadcrumb -->
+        <nav class="mb-6 flex" aria-label="Breadcrumb">
+            <ol class="inline-flex items-center space-x-1 md:space-x-3 rtl:space-x-reverse opacity-90 hover:opacity-100 transition-opacity">
+                <li class="inline-flex items-center">
+                    <a href="{{ route('frontend.index') }}" class="inline-flex items-center text-sm font-medium text-white hover:text-blue-200">
+                        <i class="fa-solid fa-house mr-2"></i> Beranda
+                    </a>
+                </li>
+                <li aria-current="page">
+                    <div class="flex items-center">
+                        <i class="fa-solid fa-chevron-right mx-2 text-xs text-blue-300"></i>
+                        <span class="ms-1 text-sm font-medium text-blue-200 md:ms-2">Transparansi</span>
+                    </div>
+                </li>
+            </ol>
+        </nav>
 
-    <div class="container relative mx-auto px-4">
-        <div class="text-center">
-            <h1 class="mb-4 text-4xl font-bold md:text-5xl">
-                <i class="fa-solid fa-chart-line mr-2"></i>
-                {{ __($module_title) }} Desa
+        <div class="text-center md:text-left max-w-4xl">
+            <h1 class="mb-4 text-4xl font-extrabold leading-tight tracking-tight md:text-5xl lg:text-6xl drop-shadow-sm">
+                <i class="fa-solid fa-file-invoice-dollar mr-3 opacity-80"></i>{{ __($module_title) }} Desa
             </h1>
-            <p class="mx-auto max-w-2xl text-lg text-blue-100 md:text-xl">
-            <p class="mx-auto max-w-2xl text-lg text-blue-100">
-                Pilih kategori statistik untuk melihat detail data.
+            <p class="text-lg font-light text-blue-100 max-w-2xl leading-relaxed">
+                Wujud komitmen pemerintah desa dalam pengelolaan anggaran yang terbuka, akuntabel, dan partisipatif.
             </p>
         </div>
     </div>
 </section>
-<section class="py-12 bg-gray-50 dark:bg-gray-900">
-    <div class="container mx-auto px-4">
+
+<!-- Main Content -->
+<section class="bg-gray-50 py-16 dark:bg-gray-900 relative min-h-screen">
+    <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/clean-gray-paper.png')] opacity-30"></div>
+    
+    <div class="container relative mx-auto px-4 z-10">
+        <h2 class="mb-8 text-2xl font-bold text-gray-800 dark:text-white border-l-4 border-blue-600 pl-4">
+            Arsip Laporan APBDes
+        </h2>
+
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             @foreach($years as $year)
-            <div class="max-w-sm w-full bg-white rounded-lg border border-gray-200 shadow-sm transition-all duration-300 hover:shadow-lg hover:-translate-y-1 dark:bg-gray-800 dark:border-gray-700">
-                <a href="{{ route('frontend.transparansi.show', 'apbdes-' . $year) }}" wire:navigate>
-                    <div class="p-6">
-                        <!-- Icon with gradient background -->
-                        <div class="mb-4 inline-flex h-14 w-14 items-center justify-center rounded-xl bg-gradient-to-br from-green-500 to-green-700 shadow-md">
-                            <i class="fa-solid fa-calendar-days text-2xl text-white"></i>
-                        </div>
-                        
-                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white group-hover:text-green-600">
-                            APBDes {{ $year }}
-                        </h5>
-                        
-                        <p class="mb-5 font-normal text-gray-700 dark:text-gray-400">
-                            Laporan Realisasi Pelaksanaan Anggaran Pendapatan dan Belanja Desa Tahun Anggaran {{ $year }}.
-                        </p>
-                        
-                        <div class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-green-700 rounded-lg hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
-                            Lihat Laporan
-                            <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
-                            </svg>
-                        </div>
+            <a href="{{ route('frontend.transparansi.show', 'apbdes-' . $year) }}" wire:navigate class="group relative flex flex-col overflow-hidden rounded-2xl bg-white shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-xl dark:bg-gray-800 border border-gray-100 dark:border-gray-700">
+                <div class="p-6 flex flex-row items-center gap-4">
+                    <!-- Icon Bubble -->
+                    <div class="inline-flex h-16 w-16 flex-shrink-0 items-center justify-center rounded-2xl bg-blue-50 text-blue-600 group-hover:bg-blue-600 group-hover:text-white transition-colors duration-300 dark:bg-gray-700 dark:text-blue-400">
+                        <i class="fa-solid fa-folder-open text-3xl"></i>
                     </div>
-                </a>
-            </div>
+                    
+                    <div class="flex-1">
+                        <h5 class="text-2xl font-bold tracking-tight text-gray-900 dark:text-white group-hover:text-blue-600 transition-colors">
+                            {{ $year }}
+                        </h5>
+                        <p class="text-xs text-gray-500 dark:text-gray-400 font-medium uppercase tracking-wide">
+                            Tahun Anggaran
+                        </p>
+                    </div>
+                    
+                     <div class="text-gray-300 group-hover:text-blue-500 transition-colors">
+                        <i class="fa-solid fa-chevron-right"></i>
+                    </div>
+                </div>
+                <div class="bg-blue-50/50 px-6 py-3 border-t border-gray-100 dark:border-gray-700 dark:bg-gray-800/50">
+                    <span class="text-xs font-semibold text-blue-600 dark:text-blue-400 flex items-center">
+                        Buka Laporan <i class="fa-solid fa-arrow-right ml-2 text-[10px] transition-transform group-hover:translate-x-1"></i>
+                    </span>
+                </div>
+            </a>
             @endforeach
         </div>
     </div>
 </section>
-
 @endsection
